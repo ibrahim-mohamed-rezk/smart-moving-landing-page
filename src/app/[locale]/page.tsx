@@ -10,13 +10,13 @@ const HomePage = () => {
         height={1080}
         className="w-full h-auto"
       />
-      <Image
+      {/* <Image
         src="/landing/Logo.png"
         alt="Logo"
         width={400}
         height={160}
         className="w-full h-auto max-w-md mx-auto"
-      />
+      /> */}
       <Image
         src="/landing/2.png"
         alt="Image 2"
