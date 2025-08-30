@@ -1,0 +1,42 @@
+/* fonts */
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap");
+
+/* local fonts */
+@font-face {
+  font-family: "Franklin Gothic Heavy";
+  src: url("/fonts/FranklinGothic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@import "tailwindcss";
+
+button {
+  cursor: pointer;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hero-list ul {
+  list-style: disc;
+  list-style-position: inside;
+}
+
+* {
+  font-family: "Libre Baskerville", serif;
+}
+
+html[dir="rtl"] input, html[dir="rtl"] textarea {
+  direction: rtl;
+}
+
+.ltr-dir{
+  direction: ltr;
+}
