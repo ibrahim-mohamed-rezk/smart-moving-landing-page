@@ -1,17 +1,17 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
-import { useState, useRef, useEffect } from "react";
-import { Link, usePathname, useRouter } from "@/i18n/routing";
+// import { useLocale, useTranslations } from "next-intl";
+// import { useState, useRef, useEffect } from "react";
+import { Link } from "@/i18n/routing";
 // import { ChevronDown, Check, Menu, X, BadgePercent } from "lucide-react";
 import Image from "next/image";
 import Script from "next/script";
 // import AuthModal from "../ui/AuthModal";
 // import { navigatons } from "@/libs/data/data";
-import axios from "axios";
-import { useSearchParams } from "next/navigation";
+// import axios from "axios";
+// import { useSearchParams } from "next/navigation";
 // import ForgetPasswordModal from "../ui/ForgetPasswordModal";
-import { UserDataTypes } from "@/libs/types/types";
+// import { UserDataTypes } from "@/libs/types/types";
 
 // const flagMap: Record<string, string> = {
 //   en: "gb",
