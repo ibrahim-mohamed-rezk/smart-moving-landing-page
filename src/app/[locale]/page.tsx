@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -71,16 +72,32 @@ function ServiceCard({ src, alt }: { src: string; alt: string }) {
 }
 
 /* ==== البنر الأزرق ==== */
+import { ChevronLeft, ChevronRight } from "lucide-react"; // أيقونات جاهزة
+
 function BannerSlider() {
   const [i, setI] = useState(0);
+
+  // auto slide
   useEffect(() => {
-    const t = setInterval(() => setI((p) => (p + 1) % bannerSlides.length), 4000);
+    const t = setInterval(
+      () => setI((p) => (p + 1) % bannerSlides.length),
+      4000
+    );
     return () => clearInterval(t);
   }, []);
+
+  const prevSlide = () => {
+    setI((p) => (p - 1 + bannerSlides.length) % bannerSlides.length);
+  };
+
+  const nextSlide = () => {
+    setI((p) => (p + 1) % bannerSlides.length);
+  };
 
   return (
     <Reveal>
       <div className="rounded-[18px] overflow-hidden shadow-[0_6px_20px_rgba(0,0,0,0.06)] bg-[#14284B] relative">
+        {/* الصورة */}
         <Image
           key={bannerSlides[i]}
           src={bannerSlides[i]}
@@ -89,6 +106,26 @@ function BannerSlider() {
           height={263}
           className="w-full h-auto object-contain"
         />
+
+        {/* زرار left */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 p-2 rounded-full transition"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft className="w-6 h-6 text-white" />
+        </button>
+
+        {/* زرار right */}
+        <button
+          onClick={nextSlide}
+          className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 p-2 rounded-full transition"
+          aria-label="Next slide"
+        >
+          <ChevronRight className="w-6 h-6 text-white" />
+        </button>
+
+        {/* النقاط */}
         <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex items-center gap-2">
           {bannerSlides.map((_, idx) => (
             <button
@@ -105,6 +142,7 @@ function BannerSlider() {
     </Reveal>
   );
 }
+
 
 /* ==== حمّل التطبيق الآن + Popup ==== */
 function DownloadApp() {
@@ -153,7 +191,7 @@ function DownloadApp() {
           <div className="bg-white rounded-xl p-6 shadow-xl text-center max-w-sm w-full">
             <h2 className="text-xl font-bold mb-3 text-gray-800">🚧 Coming Soon</h2>
             <p className="text-gray-600 mb-5">التطبيق لسه تحت التحضير وهيتوفر قريبًا.</p>
-            <button onClick={() => setShow(false)} className="px-6 py-2 text-white rounded-md">
+            <button onClick={() => setShow(false)} className="px-6 py-2 text-dark bg-[#69C24E] rounded-md">
               إغلاق
             </button>
           </div>
@@ -253,7 +291,7 @@ export default function HomePage() {
         {/* من نحن */}
         <section id="about" className="mt-6 md:mt-8 scroll-mt-24 md:scroll-mt-28">
           <Reveal>
-            <div className="rounded-[28px] overflow-hidden shadow-[0_8px_28px_rgba(0,0,0,0.10)] bg-[#14284B]">
+            <div className="rounded-[28px] overflow-hidden shadow-[0_8px_28px_rgba(0,0,0,0.10)] bg-[#F0F2F4]">
               <Image
                 src="/landing/OUR.png"
                 alt="من نحن - Smart Moving"
@@ -264,6 +302,24 @@ export default function HomePage() {
             </div>
           </Reveal>
         </section>
+
+          {/* من نحن */}
+
+          <section id="contact-drivers" className="mt-6 md:mt-8 scroll-mt-24 md:scroll-mt-28">
+            <Reveal>
+              <div className="rounded-[28px] overflow-hidden shadow-[0_8px_28px_rgba(0,0,0,0.10)] bg-[#F0F2F4]">
+                <Link href="#contact" scroll={true}>
+                  <Image
+                    src="/landing/driver.png"
+                    alt="من نحن - Smart Moving"
+                    width={1286}
+                    height={667}
+                    className="w-full h-auto object-contain cursor-pointer"
+                  />
+                </Link>
+              </div>
+            </Reveal>
+          </section>
 
         {/* تواصل معنا */}
         <section id="contact" className="mt-6 md:mt-10 scroll-mt-24 md:scroll-mt-28">

@@ -4,12 +4,12 @@ import Image from "next/image";
 
 export default function Footer() {
   const SOCIAL = [
-    { label: "Facebook", href: "#" },
-    { label: "Instagram", href: "#" },
-    { label: "Whatsapp", href: "#" },
+    { label: "Facebook", href: "https://www.facebook.com/smart.moving.2025" },
+    { label: "Instagram", href: "https://www.instagram.com/smart_moving_1" },
+    { label: "Whatsapp", href: "https://wa.me/+963996833078" },
   ];
   const EMAIL = "info@smart-moving.net";
-  const WEBSITE = "https://www.smart-moving.net";
+  const WEBSITE = "https://www.smart-moving.net/ar";
 
   return (
     <footer
@@ -20,15 +20,7 @@ export default function Footer() {
       <div className="mx-auto max-w-[1200px] px-4 md:px-6 py-5">
         {/* موبايل: عمودي — ديسكتوب: صف */}
         <div className="flex flex-col items-center gap-4 md:flex-row md:items-center md:justify-between">
-          {/* Logo */}
-          <Image
-            src="/landing/Logo.png"
-            alt="SMART MOVING SERVICES"
-            width={180}
-            height={52}
-            className="h-10 w-auto object-contain"
-            priority={false}
-          />
+
 
           {/* Links */}
           <div className="w-full md:w-auto flex flex-col items-center gap-3 text-[14px] text-black">
@@ -63,6 +55,15 @@ export default function Footer() {
               </a>
             </div>
           </div>
+                    {/* Logo */}
+                    <Image
+            src="/landing/logo-footer.png"
+            alt="SMART MOVING SERVICES"
+            width={180}
+            height={52}
+            className="h-10 w-auto object-contain"
+            priority={false}
+          />
         </div>
       </div>
     </footer>
