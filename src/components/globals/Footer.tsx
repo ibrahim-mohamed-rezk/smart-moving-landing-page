@@ -1,87 +1,68 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 
 export default function Footer() {
-  // عدّل الروابط هنا
   const SOCIAL = [
-    { label: "Facebook", href: "https://facebook.com/smartmoving" },
-    { label: "Instagram", href: "https://instagram.com/smartmoving" },
-    { label: "Whatsapp", href: "https://wa.me/201234567890" },
+    { label: "Facebook", href: "#" },
+    { label: "Instagram", href: "#" },
+    { label: "Whatsapp", href: "#" },
   ];
   const EMAIL = "info@smart-moving.net";
   const WEBSITE = "https://www.smart-moving.net";
 
   return (
-    <footer className="w-full  border-t border-black/10">
-      <div
-        className="
-          mx-auto max-w-[1200px] px-4 md:px-6
-          py-3 md:py-4
-          flex flex-wrap items-center gap-x-4 gap-y-2
-          justify-between
-        "
-      >
-        {/* Logo */}
-        <div className="flex items-center">
-          {/* بدّل المسار حسب مكان اللوجو عندك */}
+    <footer
+      dir="rtl"
+      role="contentinfo"
+      className="relative z-10 w-full bg-[#F4F6F8] border-t border-black/10"
+    >
+      <div className="mx-auto max-w-[1200px] px-4 md:px-6 py-5">
+        {/* موبايل: عمودي — ديسكتوب: صف */}
+        <div className="flex flex-col items-center gap-4 md:flex-row md:items-center md:justify-between">
+          {/* Logo */}
           <Image
             src="/landing/Logo.png"
             alt="SMART MOVING SERVICES"
             width={180}
             height={52}
-            className="h-8 w-auto object-contain"
+            className="h-10 w-auto object-contain"
             priority={false}
           />
-        </div>
 
-        {/* Links row */}
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[15px] text-black">
-          {/* Socials */}
-          <span className="flex items-center gap-x-3">
-            {SOCIAL.map((s, idx) => (
-              <span key={s.label} className="flex items-center">
-                <Link
+          {/* Links */}
+          <div className="w-full md:w-auto flex flex-col items-center gap-3 text-[14px] text-black">
+            {/* Socials */}
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+              {SOCIAL.map((s) => (
+                <a
+                  key={s.label}
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:underline"
+                  className="hover:underline whitespace-nowrap"
                 >
                   {s.label}
-                </Link>
-                {idx < SOCIAL.length - 1 && (
-                  <span className="mx-3 text-black/50">|</span>
-                )}
-              </span>
-            ))}
-          </span>
+                </a>
+              ))}
+            </div>
 
-          {/* Email */}
-          <span className="mx-3 hidden md:inline text-black/50">|</span>
-          <span className="flex items-center gap-2">
-            <span className="font-normal">Email:</span>
-            <a
-              href={`mailto:${EMAIL}`}
-              className="hover:underline break-all"
-            >
-              {EMAIL}
-            </a>
-          </span>
-
-          {/* Website */}
-          <span className="mx-3 text-black/50">|</span>
-          <span className="flex items-center gap-2">
-            <span className="font-normal">Website:</span>
-            <a
-              href={WEBSITE}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:underline"
-            >
-              www.smart-moving.net
-            </a>
-          </span>
+            {/* Email + Website */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
+              <a href={`mailto:${EMAIL}`} className="hover:underline break-all">
+                {EMAIL}
+              </a>
+              <span className="hidden sm:inline text-black/40">|</span>
+              <a
+                href={WEBSITE}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline break-all"
+              >
+                {WEBSITE.replace(/^https?:\/\//, "")}
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
