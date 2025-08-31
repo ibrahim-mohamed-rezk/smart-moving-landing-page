@@ -1,8 +1,8 @@
 "use client";
+import React, { useEffect, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
-
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 /* ==== بيانات سلايدر البنرات ==== */
 const bannerSlides = [
@@ -18,7 +18,7 @@ function Reveal({
   className = "",
   delay = 0,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   delay?: number;
 }) {
@@ -72,8 +72,6 @@ function ServiceCard({ src, alt }: { src: string; alt: string }) {
 }
 
 /* ==== البنر الأزرق ==== */
-import { ChevronLeft, ChevronRight } from "lucide-react"; // أيقونات جاهزة
-
 function BannerSlider() {
   const [i, setI] = useState(0);
 
@@ -86,18 +84,12 @@ function BannerSlider() {
     return () => clearInterval(t);
   }, []);
 
-  const prevSlide = () => {
-    setI((p) => (p - 1 + bannerSlides.length) % bannerSlides.length);
-  };
-
-  const nextSlide = () => {
-    setI((p) => (p + 1) % bannerSlides.length);
-  };
+  const prevSlide = () => setI((p) => (p - 1 + bannerSlides.length) % bannerSlides.length);
+  const nextSlide = () => setI((p) => (p + 1) % bannerSlides.length);
 
   return (
     <Reveal>
       <div className="rounded-[18px] overflow-hidden shadow-[0_6px_20px_rgba(0,0,0,0.06)] bg-[#14284B] relative">
-        {/* الصورة */}
         <Image
           key={bannerSlides[i]}
           src={bannerSlides[i]}
@@ -143,6 +135,106 @@ function BannerSlider() {
   );
 }
 
+/* ==== فورم التواصل (يرسل إلى /api/contact) ==== */
+function ContactForm() {
+  const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("loading");
+    setError(null);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const payload = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      message: formData.get("message"),
+      honeypot: formData.get("company"), // حقل مخفي للسبام
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const json = await res.json();
+
+      if (json.ok) {
+        setStatus("ok");
+        form.reset();
+      } else {
+        setStatus("error");
+        setError(json.error || "حصل خطأ أثناء الإرسال");
+      }
+    } catch {
+      setStatus("error");
+      setError("فشل الاتصال بالخادم");
+    }
+  }
+
+  return (
+    <form className="space-y-4" onSubmit={onSubmit}>
+      {/* Honeypot (Anti-spam) */}
+      <input type="text" name="company" className="hidden" tabIndex={-1} autoComplete="off" />
+
+      <div>
+        <label className="block mb-1 font-medium text-gray-700">الاسم</label>
+        <input
+          name="name"
+          type="text"
+          required
+          className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+        />
+      </div>
+
+      <div>
+        <label className="block mb-1 font-medium text-gray-700">البريد الإلكتروني</label>
+        <input
+          name="email"
+          type="email"
+          required
+          className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+        />
+      </div>
+
+      <div>
+        <label className="block mb-1 font-medium text-gray-700">رقم الهاتف</label>
+        <input
+          name="phone"
+          type="tel"
+          className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+        />
+      </div>
+
+      <div>
+        <label className="block mb-1 font-medium text-gray-700">الرسالة</label>
+        <textarea
+          name="message"
+          rows={4}
+          required
+          className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+        />
+      </div>
+
+      <button
+        type="submit"
+        disabled={status === "loading"}
+        className="bg-[#14284B] text-white px-6 py-2 rounded-md font-semibold disabled:opacity-60"
+      >
+        {status === "loading" ? "جارٍ الإرسال..." : "إرسال"}
+      </button>
+
+      {/* رسائل الحالة */}
+      {status === "ok" && <p className="text-green-600 font-medium">تم إرسال رسالتك بنجاح، هنرجع لك قريبًا.</p>}
+      {status === "error" && <p className="text-red-600 font-medium">خطأ: {error}</p>}
+    </form>
+  );
+}
 
 /* ==== حمّل التطبيق الآن + Popup ==== */
 function DownloadApp() {
@@ -303,23 +395,22 @@ export default function HomePage() {
           </Reveal>
         </section>
 
-          {/* من نحن */}
-
-          <section id="contact-drivers" className="mt-6 md:mt-8 scroll-mt-24 md:scroll-mt-28">
-            <Reveal>
-              <div className="rounded-[28px] overflow-hidden shadow-[0_8px_28px_rgba(0,0,0,0.10)] bg-[#F0F2F4]">
-                <Link href="#contact" scroll={true}>
-                  <Image
-                    src="/landing/driver.png"
-                    alt="من نحن - Smart Moving"
-                    width={1286}
-                    height={667}
-                    className="w-full h-auto object-contain cursor-pointer"
-                  />
-                </Link>
-              </div>
-            </Reveal>
-          </section>
+        {/* صورة السائقين - تنقل إلى contact */}
+        <section id="contact-drivers" className="mt-6 md:mt-8 scroll-mt-24 md:scroll-mt-28">
+          <Reveal>
+            <div className="rounded-[28px] overflow-hidden shadow-[0_8px_28px_rgba(0,0,0,0.10)] bg-[#F0F2F4]">
+              <Link href="#contact" scroll>
+                <Image
+                  src="/landing/driver.png"
+                  alt="من نحن - Smart Moving"
+                  width={1286}
+                  height={667}
+                  className="w-full h-auto object-contain cursor-pointer"
+                />
+              </Link>
+            </div>
+          </Reveal>
+        </section>
 
         {/* تواصل معنا */}
         <section id="contact" className="mt-6 md:mt-10 scroll-mt-24 md:scroll-mt-28">
@@ -336,39 +427,7 @@ export default function HomePage() {
               </div>
 
               <div className="p-6 md:p-10 flex flex-col justify-center">
-                <form className="space-y-4">
-                  <div>
-                    <label className="block mb-1 font-medium text-gray-700">الاسم</label>
-                    <input
-                      type="text"
-                      className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                    />
-                  </div>
-                  <div>
-                    <label className="block mb-1 font-medium text-gray-700">البريد الإلكتروني</label>
-                    <input
-                      type="email"
-                      className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                    />
-                  </div>
-                  <div>
-                    <label className="block mb-1 font-medium text-gray-700">رقم الهاتف</label>
-                    <input
-                      type="tel"
-                      className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                    />
-                  </div>
-                  <div>
-                    <label className="block mb-1 font-medium text-gray-700">الرسالة</label>
-                    <textarea
-                      rows={4}
-                      className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                    />
-                  </div>
-                  <button type="submit" className="bg-[#14284B] text-white px-6 py-2 rounded-md font-semibold">
-                    إرسال
-                  </button>
-                </form>
+                <ContactForm />
               </div>
             </div>
           </Reveal>
