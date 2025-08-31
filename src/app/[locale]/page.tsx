@@ -17,7 +17,7 @@ const HomePage = () => {
         height={160}
         className="w-full h-auto max-w-md mx-auto"
       /> */}
-      <Image
+      {/* <Image
         src="/landing/2.png"
         alt="Image 2"
         width={1920}
@@ -44,14 +44,14 @@ const HomePage = () => {
         width={1920}
         height={1080}
         className="w-full h-auto"
-      />
-      <Image
+      /> */}
+      {/* <Image
         src="/landing/Footer.png"
         alt="Footer"
         width={1920}
         height={1080}
         className="w-full h-auto"
-      />
+      /> */}
       <Image
         src="/landing/Group 2 copy 2.png"
         alt="Group 2 copy 2"
@@ -80,27 +80,27 @@ const HomePage = () => {
         height={1080}
         className="w-full h-auto"
       />
-      <Image
+      {/* <Image
         src="/landing/Layer 19.png"
         alt="Layer 19"
         width={1920}
         height={1080}
         className="w-full h-auto"
-      />
-      <Image
+      /> */}
+      {/* <Image
         src="/landing/Layer 20.png"
         alt="Layer 20"
         width={1920}
         height={1080}
         className="w-full h-auto"
-      />
-      <Image
+      /> */}
+      {/* <Image
         src="/landing/Layer 21.png"
         alt="Layer 21"
         width={1920}
         height={1080}
         className="w-full h-auto"
-      />
+      /> */}
       <Image
         src="/landing/OUR.png"
         alt="OUR"
