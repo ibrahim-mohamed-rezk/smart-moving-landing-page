@@ -52,7 +52,7 @@ function Reveal({
       initial="initial"
       whileInView="animate"
       viewport={{ once: true, margin: "-80px" }}
-      style={{ transitionDelay: `${delay}ms` } as React.CSSProperties }
+      style={{ transitionDelay: `${delay}ms` } as React.CSSProperties}
       className={className}
     >
       {children}
@@ -158,9 +158,8 @@ function BannerSlider() {
               whileHover={{ scale: 1.15 }}
               onClick={() => setI(idx)}
               aria-label={`slide-${idx + 1}`}
-              className={`h-2.5 rounded-full transition-all ${
-                idx === i ? "w-4 bg-[#69C24E]" : "w-2.5 bg-white/90"
-              }`}
+              className={`h-2.5 rounded-full transition-all ${idx === i ? "w-4 bg-[#69C24E]" : "w-2.5 bg-white/90"
+                }`}
             />
           ))}
         </div>
@@ -507,31 +506,7 @@ export default function HomePage() {
         </section>
 
         {/* تواصل معنا */}
-        <section id="contact" className="mt-6 md:mt-10 scroll-mt-24 md:scroll-mt-28">
-          <Reveal>
-            <motion.div variants={fadeIn} className="grid md:grid-cols-2 gap-6 bg-white rounded-[28px] overflow-hidden shadow-[0_8px_28px_rgba(0,0,0,0.08)]">
-              <div className="bg-[#69C24E] flex items-center justify-center">
-                <motion.div
-                  initial={{ opacity: 0.9 }}
-                  animate={{ opacity: [0.9, 1, 0.9] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <Image
-                    src="/landing/Layer 20.png"
-                    alt="اتصل بنا - Smart Moving"
-                    width={857}
-                    height={678}
-                    className="w-full h-auto object-contain"
-                  />
-                </motion.div>
-              </div>
-
-              <div className="p-6 md:p-10 flex flex-col justify-center">
-                <ContactForm />
-              </div>
-            </motion.div>
-          </Reveal>
-        </section>
+        <section id="contact" className="mt-6 md:mt-10 scroll-mt-24 md:scroll-mt-28"> <Reveal> <div className="grid md:grid-cols-2 gap-6 bg-white rounded-[28px] overflow-hidden shadow-[0_8px_28px_rgba(0,0,0,0.08)]"> <div className="bg-[#69C24E] flex items-center justify-center"> <Image src="/landing/Layer 20.png" alt="اتصل بنا - Smart Moving" width={857} height={678} className="w-full h-auto object-contain" /> </div> <div className="p-6 md:p-10 flex flex-col justify-center"> <ContactForm /> </div> </div> </Reveal> </section>
 
         {/* حمّل التطبيق الآن */}
         <DownloadApp />
