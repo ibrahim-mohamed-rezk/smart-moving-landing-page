@@ -52,7 +52,7 @@ function Reveal({
       initial="initial"
       whileInView="animate"
       viewport={{ once: true, margin: "-80px" }}
-      style={{ transitionDelay: `${delay}ms` as any }}
+      style={{ transitionDelay: `${delay}ms` } as React.CSSProperties }
       className={className}
     >
       {children}
