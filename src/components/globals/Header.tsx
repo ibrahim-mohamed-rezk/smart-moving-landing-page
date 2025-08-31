@@ -2,156 +2,156 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { useState, useRef, useEffect } from "react";
-import { Link, routing, usePathname, useRouter } from "@/i18n/routing";
-import { ChevronDown, Check, Menu, X, BadgePercent } from "lucide-react";
+import { Link, usePathname, useRouter } from "@/i18n/routing";
+// import { ChevronDown, Check, Menu, X, BadgePercent } from "lucide-react";
 import Image from "next/image";
 import Script from "next/script";
-import AuthModal from "../ui/AuthModal";
-import { navigatons } from "@/libs/data/data";
+// import AuthModal from "../ui/AuthModal";
+// import { navigatons } from "@/libs/data/data";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
-import ForgetPasswordModal from "../ui/ForgetPasswordModal";
+// import ForgetPasswordModal from "../ui/ForgetPasswordModal";
 import { UserDataTypes } from "@/libs/types/types";
 
-const flagMap: Record<string, string> = {
-  en: "gb",
-  ar: "sa",
-};
+// const flagMap: Record<string, string> = {
+//   en: "gb",
+//   ar: "sa",
+// };
 
 export default function Header() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const locale = useLocale();
-  const [openForgotPassword, setOpenForgotPassword] = useState(false);
-  const [langOpen, setLangOpen] = useState(false);
-  const [authModalType, setAuthModalType] = useState<
-    "login" | "register" | "verify" | null
-  >(null);
-  const t = useTranslations("header");
-  const [token, setToken] = useState<string | null>(null);
-  const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const [userMobileMenuOpen, setUserMbileMenuOpen] = useState(false);
-  const searchParams = useSearchParams();
-  const [user, setUser] = useState<UserDataTypes | null>(null);
-  const userMenuRef = useRef<HTMLDivElement>(null);
-  const userMobileMenuRef = useRef<HTMLDivElement>(null);
+  // const router = useRouter();
+  // const pathname = usePathname();
+  // const locale = useLocale();
+  // const [openForgotPassword, setOpenForgotPassword] = useState(false);
+  // const [langOpen, setLangOpen] = useState(false);
+  // const [authModalType, setAuthModalType] = useState<
+  //   "login" | "register" | "verify" | null
+  // >(null);
+  // const t = useTranslations("header");
+  // const [token, setToken] = useState<string | null>(null);
+  // const [userMenuOpen, setUserMenuOpen] = useState(false);
+  // const [userMobileMenuOpen, setUserMbileMenuOpen] = useState(false);
+  // const searchParams = useSearchParams();
+  // const [user, setUser] = useState<UserDataTypes | null>(null);
+  // const userMenuRef = useRef<HTMLDivElement>(null);
+  // const userMobileMenuRef = useRef<HTMLDivElement>(null);
 
-  const [menuOpen, setMenuOpen] = useState(false);
-  const langRef = useRef<HTMLDivElement>(null);
-  const [showNotification, setShowNotification] = useState(false);
-  const [showNotificationChat, setShowNotificationChat] = useState(0);
+  // const [menuOpen, setMenuOpen] = useState(false);
+  // const langRef = useRef<HTMLDivElement>(null);
+  // const [showNotification, setShowNotification] = useState(false);
+  // const [showNotificationChat, setShowNotificationChat] = useState(0);
 
-  const changeLanguage = (l: string) => {
-    const paramsString = searchParams.toString();
-    const url = paramsString ? `${pathname}?${paramsString}` : pathname;
+  // const changeLanguage = (l: string) => {
+  //   const paramsString = searchParams.toString();
+  //   const url = paramsString ? `${pathname}?${paramsString}` : pathname;
 
-    router.replace(url, { locale: l });
-    setLangOpen(false);
-  };
+  //   router.replace(url, { locale: l });
+  //   setLangOpen(false);
+  // };
 
-  useEffect(() => {
-    const feachData = async () => {
-      try {
-        const response = await axios.get("/api/auth/getToken");
-        setToken(response.data.token);
-        setUser(JSON.parse(response.data.user));
-      } catch (error) {
-        throw error;
-      }
-    };
+  // useEffect(() => {
+  //   const feachData = async () => {
+  //     try {
+  //       const response = await axios.get("/api/auth/getToken");
+  //       setToken(response.data.token);
+  //       setUser(JSON.parse(response.data.user));
+  //     } catch (error) {
+  //       throw error;
+  //     }
+  //   };
 
-    feachData();
-  }, []);
+  //   feachData();
+  // }, []);
 
-  useEffect(() => {
-    const onClick = (e: MouseEvent) => {
-      if (langRef.current && !langRef.current.contains(e.target as Node)) {
-        setLangOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", onClick);
-    return () => document.removeEventListener("mousedown", onClick);
-  }, []);
+  // useEffect(() => {
+  //   const onClick = (e: MouseEvent) => {
+  //     if (langRef.current && !langRef.current.contains(e.target as Node)) {
+  //       setLangOpen(false);
+  //     }
+  //   };
+  //   document.addEventListener("mousedown", onClick);
+  //   return () => document.removeEventListener("mousedown", onClick);
+  // }, []);
 
-  useEffect(() => {
-    const feachData = async () => {
-      if (!token) return null;
-      try {
-        const response = await axios.post(
-          "/api/coockies/get-data-from-coockies",
-          {
-            key: "has_hold",
-          }
-        );
-        setShowNotification(response.data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  // useEffect(() => {
+  //   const feachData = async () => {
+  //     if (!token) return null;
+  //     try {
+  //       const response = await axios.post(
+  //         "/api/coockies/get-data-from-coockies",
+  //         {
+  //           key: "has_hold",
+  //         }
+  //       );
+  //       setShowNotification(response.data.data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
 
-    feachData();
+  //   feachData();
 
-    // Set up interval for subsequent fetches
-    const intervalId = setInterval(feachData, 10000);
+  //   // Set up interval for subsequent fetches
+  //   const intervalId = setInterval(feachData, 10000);
 
-    // Cleanup interval on component unmount
-    return () => clearInterval(intervalId);
-  }, [token]);
+  //   // Cleanup interval on component unmount
+  //   return () => clearInterval(intervalId);
+  // }, [token]);
 
-  useEffect(() => {
-    const feachData = async () => {
-      if (!token) return null;
-      try {
-        const response = await axios.post(
-          "/api/coockies/get-data-from-coockies",
-          {
-            key: "un_read_message_count",
-          }
-        );
-        setShowNotificationChat(response.data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  // useEffect(() => {
+  //   const feachData = async () => {
+  //     if (!token) return null;
+  //     try {
+  //       const response = await axios.post(
+  //         "/api/coockies/get-data-from-coockies",
+  //         {
+  //           key: "un_read_message_count",
+  //         }
+  //       );
+  //       setShowNotificationChat(response.data.data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
 
-    feachData();
-  }, [token]);
+  //   feachData();
+  // }, [token]);
 
-  useEffect(() => {
-    const onClick = (e: MouseEvent) => {
-      if (
-        userMenuRef.current &&
-        !userMenuRef.current.contains(e.target as Node)
-      ) {
-        setUserMenuOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", onClick);
-    return () => document.removeEventListener("mousedown", onClick);
-  }, []);
+  // useEffect(() => {
+  //   const onClick = (e: MouseEvent) => {
+  //     if (
+  //       userMenuRef.current &&
+  //       !userMenuRef.current.contains(e.target as Node)
+  //     ) {
+  //       setUserMenuOpen(false);
+  //     }
+  //   };
+  //   document.addEventListener("mousedown", onClick);
+  //   return () => document.removeEventListener("mousedown", onClick);
+  // }, []);
 
-  useEffect(() => {
-    const onClick = (e: MouseEvent) => {
-      if (
-        userMobileMenuRef.current &&
-        !userMobileMenuRef.current.contains(e.target as Node)
-      ) {
-        setUserMbileMenuOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", onClick);
-    return () => document.removeEventListener("mousedown", onClick);
-  }, []);
+  // useEffect(() => {
+  //   const onClick = (e: MouseEvent) => {
+  //     if (
+  //       userMobileMenuRef.current &&
+  //       !userMobileMenuRef.current.contains(e.target as Node)
+  //     ) {
+  //       setUserMbileMenuOpen(false);
+  //     }
+  //   };
+  //   document.addEventListener("mousedown", onClick);
+  //   return () => document.removeEventListener("mousedown", onClick);
+  // }, []);
 
-  const logout = async () => {
-    try {
-      await axios.post("/api/auth/logout");
-      setToken(null);
-      router.push("/");
-    } catch (error) {
-      throw error;
-    }
-  };
+  // const logout = async () => {
+  //   try {
+  //     await axios.post("/api/auth/logout");
+  //     setToken(null);
+  //     router.push("/");
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // };
 
   return (
     <>
@@ -432,7 +432,7 @@ export default function Header() {
         </div>
 
         {/* Mobile Menu - Outside the container but still in the header */}
-        {menuOpen && (
+        {/* {menuOpen && ( */}
           <div className="md:hidden bg-[#192953] shadow-lg border-t border-[#304680]">
             <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col space-y-4">
               {/* {user?.role === "customer" &&
@@ -642,7 +642,7 @@ export default function Header() {
               </div>
             </div>
           </div>
-        )}
+        {/* )} */}
 
         {/* {authModalType && (
           <AuthModal
