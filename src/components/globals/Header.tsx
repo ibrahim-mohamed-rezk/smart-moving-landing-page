@@ -223,39 +223,36 @@ export default function Header() {
               </Link>
 
               {/* Right side: Desktop nav */}
-              {user?.role === "customer" && (
-                <nav className="hidden ms-[clamp(20px,5.0vw,596px)] md:flex items-center gap-6">
-                  {navigatons.map((nav) => (
-                    <Link
-                      key={nav.href}
-                      href={nav.href}
-                      locale={locale}
-                      className="text-white hover:text-blue-400 font-[400] font-['Libre_Baskerville'] leading-[100%] text-[clamp(12px,0.938vw,18px)] transition-colors"
-                    >
-                      {t(nav.name)}
-                    </Link>
-                  ))}
-                </nav>
-              )}
+              {/* <nav className="hidden ms-[clamp(20px,5.0vw,596px)] md:flex items-center gap-6">
+                {navigatons.map((nav) => (
+                  <Link
+                    key={nav.href}
+                    href={nav.href}
+                    locale={locale}
+                    className="text-white hover:text-blue-400 font-[400] font-['Libre_Baskerville'] leading-[100%] text-[clamp(12px,0.938vw,18px)] transition-colors"
+                  >
+                    {t(nav.name)}
+                  </Link>
+                ))}
+              </nav> */}
 
               <div className="items-center justify-center hidden md:flex ms-auto gap-[clamp(5px,1.25vw,50px)] ">
                 {/* offers icon */}
-                {token && (
+                {/* {token && (
                   <Link
                     href="/myprofile?page=tasks"
                     onClick={() => setUserMenuOpen(false)}
                     className=" flex justify-center relative"
                   >
-                    {/* {user?.role === "customer" ? t("Offers") : t("Requests")} */}
                     <BadgePercent className="text-white" />
                     {showNotification && (
                       <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></div>
                     )}
                   </Link>
-                )}
+                )} */}
 
                 {/* chat icon */}
-                {token ? (
+                {/* {token ? (
                   <Link
                     href="/chats"
                     className="w-6 h-6 hover:opacity-70 relative"
@@ -293,10 +290,10 @@ export default function Header() {
                   >
                     {t("Login")}
                   </button>
-                )}
+                )} */}
 
                 {/* user icon */}
-                {token ? (
+                {/* {token ? (
                   <div className="relative flex" ref={userMenuRef}>
                     <button
                       onClick={() => setUserMenuOpen((open) => !open)}
@@ -323,9 +320,6 @@ export default function Header() {
                           mask="url(#path-2-inside-1_107_998)"
                         />
                       </svg>
-                      {/* {showNotification && (
-                        <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></div>
-                      )} */}
                     </button>
                     <div
                       className={`absolute overflow-hidden top-6 start-1/2 transform ${
@@ -363,10 +357,10 @@ export default function Header() {
                       {t("Register Moving Company")}
                     </button>
                   </Link>
-                )}
+                )} */}
 
                 {/* Language Switcher */}
-                <div className="relative">
+                {/* <div className="relative">
                   <button
                     onClick={() => setLangOpen((o) => !o)}
                     className="flex items-center hover:border hover:border-white/70 rounded-[clamp(10px,0.833vw,20px)] font-['Libre_Baskerville'] text-[clamp(14px,1.042vw,20px)] font-[400] py-[clamp(3px,0.417vw,5px)] px-[clamp(5px,1.562vw,10px)] justify-center gap-2 text-white cursor-pointer transition focus:outline-none"
@@ -417,12 +411,12 @@ export default function Header() {
                       </ul>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
 
             {/* Mobile Menu Button */}
-            <div className="md:hidden flex items-center">
+            {/* <div className="md:hidden flex items-center">
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
                 className="text-white focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg p-1"
@@ -433,7 +427,7 @@ export default function Header() {
                   <Menu className="w-6 h-6" />
                 )}
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -441,7 +435,7 @@ export default function Header() {
         {menuOpen && (
           <div className="md:hidden bg-[#192953] shadow-lg border-t border-[#304680]">
             <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col space-y-4">
-              {user?.role === "customer" &&
+              {/* {user?.role === "customer" &&
                 navigatons.map((nav) => (
                   <Link
                     href={nav.href}
@@ -451,10 +445,10 @@ export default function Header() {
                   >
                     {t(nav.name)}
                   </Link>
-                ))}
+                ))} */}
 
               {/* Language Switcher mobile */}
-              <div className="relative z-50 block mx-auto">
+              {/* <div className="relative z-50 block mx-auto">
                 <button
                   onClick={() => setLangOpen((o) => !o)}
                   className="flex items-center hover:border hover:border-white/70 rounded-[clamp(10px,0.833vw,20px)] font-['Libre_Baskerville'] text-[clamp(14px,1.042vw,20px)] font-[400] py-[clamp(3px,0.417vw,5px)] px-[clamp(5px,1.562vw,10px)] justify-center gap-2 text-white cursor-pointer transition focus:outline-none"
@@ -505,13 +499,13 @@ export default function Header() {
                     </ul>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/* auth buttons */}
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <div className="w-full flex relative ">
                   {/* offers icon */}
-                  {token && (
+                  {/* {token && (
                     <Link
                       href="/myprofile?page=tasks"
                       onClick={() => setMenuOpen(false)}
@@ -522,9 +516,9 @@ export default function Header() {
                         <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></div>
                       )}
                     </Link>
-                  )}
+                  )} */}
                   {/* chat icon */}
-                  {token ? (
+                  {/* {token ? (
                     <Link
                       href="/chats"
                       onClick={() => setMenuOpen(false)}
@@ -566,10 +560,10 @@ export default function Header() {
                     >
                       {t("Login")}
                     </button>
-                  )}
+                  )} */}
 
                   {/* user icon mobile */}
-                  {token ? (
+                  {/* {token ? (
                     <div className="relative mx-auto">
                       <button
                         onClick={() => setUserMbileMenuOpen((open) => !open)}
@@ -643,14 +637,14 @@ export default function Header() {
                         {t("Register Moving Company")}
                       </button>
                     </Link>
-                  )}
+                  )} */}
                 </div>
               </div>
             </div>
           </div>
         )}
 
-        {authModalType && (
+        {/* {authModalType && (
           <AuthModal
             type={authModalType}
             onClose={() => setAuthModalType(null)}
@@ -661,7 +655,7 @@ export default function Header() {
 
         {openForgotPassword && (
           <ForgetPasswordModal onClose={() => setAuthModalType(null)} />
-        )}
+        )} */}
       </header>
     </>
   );

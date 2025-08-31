@@ -3,14 +3,14 @@ import type { NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 
-const locales = ["en", "de", "ar", "fr", "dk"]; // Define supported locales
+const locales = ["ar", "dk", "en", "de", "fr"]; // Define supported locales with Arabic first
 
 const intlMiddleware = createMiddleware(routing);
 
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Check for duplicated locale like /en/en, /ar/ar, etc.
+  // Check for duplicated locale like /ar/ar, /dk/dk, etc.
   for (const locale of locales) {
     const doubleLocale = `/${locale}/${locale}`;
     if (pathname.startsWith(doubleLocale)) {
@@ -25,5 +25,5 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/(de|en|ar|fr|dk)/:path*"],
+  matcher: ["/", "/(ar|dk|en|de|fr)/:path*"],
 };

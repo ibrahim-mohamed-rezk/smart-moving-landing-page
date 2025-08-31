@@ -47,7 +47,7 @@ export default async function LocaleLayout({
           <NotificationsProvider token={token} />
           <ClientToaster />
           <Header />
-          <main className="bg-[#F0F0F0] min-h-screen rounded-tl-[20px] md:rounded-tl-[30px] lg:rounded-tl-[40px] rounded-tr-[20px] md:rounded-tr-[30px] border-b-0 pb-[50px] lg:rounded-tr-[40px]">
+          <main className="bg-[#192953] min-h-screen border-b-0 pb-[50px]">
             {children}
           </main>
           <Footer />
